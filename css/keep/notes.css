@@ -2,10 +2,9 @@
     align-items: flex-start;
     grid-gap: 5px;
     grid-auto-flow: dense;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     grid-auto-rows: 100px;
     grid-auto-flow:  dense;
-    /* height: 100vh;   */
 }
 
 
@@ -24,6 +23,7 @@
     padding: 5px;
     outline: 3px solid whitesmoke;
     align-items: flex-start;
+
 }
 
 .note-item p {

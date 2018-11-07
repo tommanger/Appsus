@@ -3,26 +3,16 @@
     export default {
         props:['data'],    
         template: `
-            <div>
-                <router-link>
-                    <img :src="data.imgUrl" :title="data.title" />
-                    <p class="txt">{{data.txt}}</p>
-                    <button @click="editNote(data.id)">Edit {{data.id}}</button>
-                    </router-link>
-                </div>
+                <router-link :to="'keep/img/'+data.id">
+                    <div>
+                        <img :src="data.imgUrl" :title="data.title" />
+                        <p class="txt">{{data.txt}}</p>
+                    </div>
+                    <button @click.stop="data.isPinned = !data.isPinned"><i class="fas fa-thumbtack" style="font-size:2em"></i></button>
+                </router-link>
         `,
-        data() {
-            return {
-
-            }
-        },
-        methods:{
-            editNote(noteId){
-                console.log(noteId);
-                this.$router.push('/keep/'+noteId)
-            }
-        },
         created() {
-            // const 
+            console.log(this.data);
+            
         },
     }

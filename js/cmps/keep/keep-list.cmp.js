@@ -9,7 +9,8 @@ export default {
         <component class="note-item flex" v-for="(note, idx) in notes" 
                         :is="note.type" 
                         :data="note.data">
-                    </component>
+        </component>
+
     </section>
     `,
     data() {
@@ -22,13 +23,14 @@ export default {
     },
     created() {
         keepService.quary()
-            .then(notes => this.notes = notes)
+            .then(notes => {
+                this.notes = notes
+            })
     },
     computed: {
     },
     components:{
         imgNote,
         txtNote,
-        // noteDetails
     }
 }
