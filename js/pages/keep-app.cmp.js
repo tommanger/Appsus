@@ -1,12 +1,13 @@
-
+import keepNav from '../cmps/keep/keep-navbar.cmp.js'
+import keepList from '../cmps/keep/keep-list.cmp.js'
 
 
 export default {
 
     template: `
     <section>
-        <h2>Keep</h2>
-        <ul class=""></ul>
+        <keep-nav></keep-nav>
+        <keep-list></keep-list>
     </section>
     `,
     data() {
@@ -20,4 +21,8 @@ export default {
     created() {
         
     },
+    components : {
+        keepList,
+        keepNav,
+    }
 }

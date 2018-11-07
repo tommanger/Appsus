@@ -10,3 +10,14 @@
     align-items: center;
 }
 
+.space-between{
+    justify-content: space-between;
+}
+
+.wrap {
+    flex-wrap: wrap;
+}
+
+.grid {
+    display: grid;
+}
