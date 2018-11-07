@@ -20,3 +20,11 @@ export default {
         
     },
 }
+
+[
+    {subject: '',
+    body: '',
+    isRead: false,
+    sentAt: (timestamp)
+} 
+]
