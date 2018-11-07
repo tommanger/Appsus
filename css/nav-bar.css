@@ -1,0 +1,33 @@
+.nav-bar-head{
+    display: flex;
+    margin: 10px;
+}
+.btn-nav-bar{
+    font-size: 45px;
+}
+
+.logo-nav-bar{
+    font-size: 40px;
+    font-family: fantasy;
+    cursor: pointer;
+}
+.nav-bar-links{
+    width: 170px;
+    height: 300px;
+    background-color: white;
+    position: fixed;
+    box-shadow: 0 0 9px 0px black;
+    margin-left: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+}
+.nav-bar-link{
+    display: flex;
+    flex-direction: column;
+}
+
+.nav-bar-icon{
+    font-size: 78px;
+}

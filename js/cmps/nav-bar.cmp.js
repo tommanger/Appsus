@@ -1,23 +1,32 @@
 export default {
   template: `
     <header>
-        <h1 class="logo flex justify-center">Appsus</h1>
-        <button @click="isShow = !isShow" title="apps">
-            <!-- <i class="fa fa-caret-square-down" aria-hidden="true"></i> -->
-        </button>
-        <i class="fas fa-grip-horizontal"></i>
+    <div @click="isShow = !isShow" class="nav-bar-head">
+        <h1 class="logo-nav-bar">APPSUS</h1>
+        <button class="btn-nav-bar"  title="apps"><i class="fas fa-caret-square-down"></i></button>
+    </div>
+        
         <nav v-if="isShow">
-
-            <router-link exact to="/">Home</router-link> |
-            <router-link exact to="/email">Email App</router-link> |
-            <router-link exact to="/keep">Keep App</router-link>
-            <button>dbgb</button>
+            <div class="nav-bar-links">
+                <div class="nav-bar-link">
+                    
+                    <router-link  exact to="/"><i class="fas fa-home nav-bar-icon"></i></router-link> 
+                </div>
+                <div class="nav-bar-link">
+                    
+                    <router-link class="nav-bar-link" exact to="/email"><i class="fas fa-envelope-square nav-bar-icon"></i></router-link> 
+                </div>
+                <div class="nav-bar-link">
+                    
+                    <router-link class="nav-bar-link" exact to="/keep"><i class="fas fa-file-alt nav-bar-icon"></i></router-link>
+                </div>
+            </div>
         </nav>
     </header>
     `,
-    data(){
-        return {
-            isShow: false,
-        }
-    }
+  data() {
+    return {
+      isShow: false
+    };
+  }
 };
