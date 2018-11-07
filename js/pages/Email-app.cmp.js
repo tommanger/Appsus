@@ -40,14 +40,3 @@ export default {
         manuEmail
     }
 }
-<<<<<<< HEAD
-
-[
-    {subject: '',
-    body: '',
-    isRead: false,
-    // sentAt: (timestamp)
-} 
-]
-=======
->>>>>>> a95af640ec868069ea5990520286084beeb30c47
