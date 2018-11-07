@@ -4,7 +4,7 @@ export default {
     <section>
         <div class="nav-bar-email">
             <h2>EmailSUS</h2>
-            <input type="text" v-model="filter.by" @input="emitFilter">
+            <input class="filter-emails" type="text" v-model="filter.by" @input="emitFilter">
         </div>
     </section>
     `,

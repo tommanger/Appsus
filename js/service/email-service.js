@@ -6,22 +6,41 @@ import utilService from './util-service.js'
 const KEY = 'emailAppKey';
 
 function getEmailsList(filter = null) {
+
     return storageService.load(KEY)
         .then(emails => {
             if (!emails || !emails.length) {
                 emails = randomEmailsList();
                 storageService.store(KEY, emails);
             }
-            console.log('emails: ', emails);
-            if (filter === null) return emails;
-            else return emails.filter(car => 
-                    emails.vendor.toUpperCase().includes(filter.byVendor.toUpperCase()))
+            // console.log('emails: ', emails);
+            if (filter === null || filter.by === null) return emails;
+            else  
+                if(typeof(filter.by) === "boolean"){
+                    return emails.filter(email =>
+                        email.isRead === filter.by && filter.type === 'read' ||
+                        email.isStar === filter.by && filter.type === 'star')
+                } else{
+                    return emails.filter(email =>
+                    email.subject.toUpperCase().includes(filter.by.toUpperCase())||
+                    email.from.toUpperCase().includes(filter.by.toUpperCase())||
+                    email.body.toUpperCase().includes(filter.by.toUpperCase())
+                    )
+                }
         })
 }
 
 
 function randomEmailsList(){
-    var list = []
+    var list = [{
+        id: utilService.makeId(8),
+        from: utilService.makeId(3),
+        subject: utilService.makeId(5),
+        body: utilService.makeId(20),
+        isRead: true,
+        isStar: true,
+        sentAt: Date.now()
+    }]
     for(let i = 0; i < 10; i++){
         list.push({
             id: utilService.makeId(8),
@@ -29,6 +48,7 @@ function randomEmailsList(){
             subject: utilService.makeId(5),
             body: utilService.makeId(20),
             isRead: false,
+            isStar: false,
             sentAt: Date.now()
         } )
     }
@@ -42,8 +62,71 @@ function getEmailByID(emailId){
         })
 }
 
+
+function deleteEmail(emailId) {
+    return storageService.load(KEY)
+        .then(emails => {
+            var emailIdx = emails.findIndex(email => email.id === emailId);
+            emails.splice(emailIdx, 1);
+            return storageService.store(KEY, emails);
+        })
+}
+
+function nextEmail(emailId) {
+    return storageService.load(KEY)
+        .then(emails => {
+            var emailIdx = emails.findIndex(email => email.id === emailId);
+            var email = (emails[emailIdx+1])? emails[emailIdx+1] : emails[0]
+            return email
+        })
+  }
+  function prevEmail(emailId) {
+    return storageService.load(KEY)
+        .then(emails => {
+            var emailIdx = emails.findIndex(email => email.id === emailId);
+            var email = (emails[emailIdx-1])? emails[emailIdx-1] : emails[emails.length-1]
+            return email
+        })
+  }
+function readMail(emailId){
+    return storageService.load(KEY)
+        .then(emails => {
+            var currEmail = emails.find(email => email.id === emailId);
+            currEmail.isRead = true
+            return storageService.store(KEY, emails);
+        })
+}
+
+function starEmail(emailId){
+    return storageService.load(KEY)
+        .then(emails => {
+            var currEmail = emails.find(email => email.id === emailId);
+            currEmail.isStar = true
+            return storageService.store(KEY, emails);
+        })
+}
+function sendEmail(newEmail){
+    return storageService.load(KEY)
+        .then(emails => {
+            newEmail.id = utilService.makeId(8);
+            newEmail.sentAt = Date.now();
+            newEmail.isRead = false;
+            newEmail.isStar = false,
+            emails.push(newEmail)
+            return storageService.store(KEY, emails);
+        })
+}
+
+
+
 export default {
     getEmailsList,
-    getEmailByID
+    getEmailByID,
+    deleteEmail,
+    sendEmail,
+    readMail,
+    starEmail,
+    nextEmail,
+    prevEmail
 }
 
