@@ -1,0 +1,9 @@
+.keep-nav {
+    height: 70px;
+    margin: 0 20px;
+    background: gray;
+}
+.nav-item {
+    font-size: 2em;
+    margin-left: 20px;
+}

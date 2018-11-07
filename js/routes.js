@@ -6,6 +6,9 @@ import emailSend from './cmps/email-cmps/email-send.cmp.js'
 
 
 import keepApp from './pages/keep-app.cmp.js';
+import keepList from './cmps/keep/keep-list.cmp.js'
+import editImg from './cmps/keep/img-edit.cmp.js';
+import editTxt from './cmps/keep/txt-edit.cmp.js';
 
 var routes = [
     {path: '/', component: homePage },
@@ -16,7 +19,13 @@ var routes = [
         {path: ':emailId', component: emailDetails},
     ] },
     
-    {path: '/keep', component: keepApp },
+    {path: '/keep', component: keepApp, children: [
+        { path: '', component: keepList },
+        {path: 'img/:noteId?', component: editImg},
+        {path: 'img/:noteId?', component: editImg},
+        {path: 'txt/:noteId?', component: editTxt},
+        {path: 'txt/:noteId?', component: editTxt},
+    ] },
 ]
 
 export default routes;
