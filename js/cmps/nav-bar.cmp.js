@@ -1,9 +1,11 @@
 export default {
   template: `
     <header>
-        <h1 class="logo">Appsus</h1>
-        <button @click="isShow = !isShow" title="apps"><i class="fas fa-caret-square-down"></i></button>
-        
+        <h1 class="logo flex justify-center">Appsus</h1>
+        <button @click="isShow = !isShow" title="apps">
+            <!-- <i class="fa fa-caret-square-down" aria-hidden="true"></i> -->
+        </button>
+        <i class="fas fa-grip-horizontal"></i>
         <nav v-if="isShow">
 
             <router-link exact to="/">Home</router-link> |
