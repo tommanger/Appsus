@@ -366,17 +366,17 @@
 }
 
 
-.fade-enter-active{
+.width-enter-active{
     transition: width .7s;
   }
-  .fade-enter{
+  .width-enter{
     width: 0;
   }
 
-.fade-leave-active {
+.width-leave-active {
     transition: width .7s;
   }
-.fade-leave-to{
+.width-leave-to{
     width: 0;
 
 }

@@ -11,7 +11,7 @@ export default {
         <nav-bar-email @filterEmails="setFilter"></nav-bar-email>
         <div class="email-container">
           <menu-email id="menu-email" class="hide" :counter="counter" @sortBy="sortBy" @filterByRead="setFilter"></menu-email>
-          <transition name="fade">
+          <transition name="width">
           <router-view @changeEmail="changeEmail"	 
                         @sendEmail="sendEmail" 
                         @readMail="readMail"
