@@ -1,4 +1,13 @@
 .home-logo{
     font-size: 100px;
     font-weight: bold;
+    display: flex;
+    justify-content: center;
+}
+.btns-home-container{
+    display: flex;
+    justify-content: space-evenly;
+}
+.btn-home:hover{
+    color: gray;
 }

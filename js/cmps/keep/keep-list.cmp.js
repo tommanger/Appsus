@@ -6,15 +6,15 @@ import eventBus, { SET_FILTER } from "../../service/event-bus.js";
 export default {
   template: `
     <section class="">
-            <section class="note-container">
+        <section class="note-container">
             <transition-group name="fade">
-            <component class="note-item flex" v-for="(note, idx) in pinnedNotes" 
-                    :is="note.type" 
-                    :data="note.data"
-                    @deleteNote="deleteNote"
-                    :key="note.data.id">    
-            </component>
-        </transition-group> 
+              <component class="note-item flex" v-for="(note, idx) in pinnedNotes" 
+                      :is="note.type" 
+                      :data="note.data"
+                      @deleteNote="deleteNote"
+                      :key="note.data.id">    
+              </component>
+          </transition-group> 
         </section>
         <section class="note-container">
         <transition-group name="fade">
@@ -23,7 +23,7 @@ export default {
             :data="note.data"
             @deleteNote="deleteNote"
             :key="note.data.id">    
-        </component>
+          </component>
         </transition-group>         
     </section>
 </section>

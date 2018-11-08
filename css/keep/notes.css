@@ -1,9 +1,11 @@
 .note-container {
     max-width: 1200px;
+    -webkit-column-count: 4;
     margin: 10px 50px;
-    columns: 4;
+    column-count: 4;
     column-gap: 10px;
-    /* background: red; */
+    height: fit-content;
+    columns: 4;
 }
 
 .note-item{
@@ -17,11 +19,12 @@
     text-align: center;
     box-shadow: 3px 3px 3px gray;
     transition: all .3s;
+    
 }
 
-.note-item:hover{
+/* .note-item:hover{
     transform: scale(1.1)
-}
+} */
 
 .note-img a {
     max-width: 200px;
@@ -66,9 +69,9 @@
 .txt-note-btn-container i,.img-note-btn-container i{
     cursor: pointer;
 }
-.txt-note-btn-container i:hover,.img-note-btn-container i:hover{
+/* .txt-note-btn-container i:hover,.img-note-btn-container i:hover{
     color: darkgoldenrod;
-}
+} */
 
 
 .pinned {
