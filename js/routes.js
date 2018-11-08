@@ -15,7 +15,7 @@ var routes = [
     
     {path: '/email', component: emailApp, children: [
         { path: '', component: emailList },
-        { path: 'sendEmail', component: emailSend },
+        { path: 'sendEmail/:emailId?', component: emailSend },
         {path: ':emailId', component: emailDetails},
     ] },
     
