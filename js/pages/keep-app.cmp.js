@@ -1,28 +1,31 @@
 import keepNav from '../cmps/keep/keep-navbar.cmp.js'
-// import keepList from '../cmps/keep/keep-list.cmp.js'
-
+import keepList from '../cmps/keep/keep-list.cmp.js';
+import eventBus , {SET_FILTER} from '../service/event-bus.js'
 
 export default {
 
     template: `
     <section>
-        <keep-nav></keep-nav>
+        <keep-nav @setFilter="setFilter"></keep-nav>
         <router-view></router-view>
     </section>
     `,
     data() {
         return {
-        
+            filter: null
         }
     },
     methods:{
-    
-    },
+        setFilter(filter){
+                this.filter = filter
+                eventBus.$emit(SET_FILTER, filter)
+            }
+        },
     created() {
         
     },
     components : {
-        // keepList,
         keepNav,
+        keepList
     }
 }

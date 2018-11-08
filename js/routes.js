@@ -22,8 +22,6 @@ var routes = [
     {path: '/keep', component: keepApp, children: [
         { path: '', component: keepList },
         {path: 'img/:noteId?', component: editImg},
-        {path: 'img/:noteId?', component: editImg},
-        {path: 'txt/:noteId?', component: editTxt},
         {path: 'txt/:noteId?', component: editTxt},
     ] },
 ]

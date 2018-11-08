@@ -1,53 +1,70 @@
 import { keepService } from "../../service/keep-service.js";
-import  utilService from '../../service/util-service.js';
+import utilService from "../../service/util-service.js";
 
 export default {
   template: `
-    <section v-if="note" class="edit-img-container">
-        <div>
-            <p class="txt">{{note.data.title}}</p>
-            <p class="txt">{{note.data.txt}}</p>
-        </div>
-        <div>
-                <textarea cols="30" rows="10" v-model="note.data.txt">{{note.data.txt}}</textarea>
-                <input type="text" v-model="note.data.title">{{note.data.title}}
-        </div>
+    <section v-if="note" class="edit-txt-container flex " :style="getColors">
+          <label>
+            <input class="edit-title" type="text" v-model="note.data.title">
+          </label>
+          <label>
+            <textarea cols="30" rows="10" v-model="note.data.txt" ></textarea>
+          </label>
+          <div class="btn-colors">
+              <label class="btn-colors-bgc">
+              <i class="fas fa-fill-drip"></i>
+                  <input type="color" v-model="note.data.backgroundColor" >
+                </label>
+                <label >
+                <i class="fas fa-brush"></i>
+                  <input type="color" v-model="note.data.color">
+                </label>
+          </div> 
+        <div class="edit-btn-container">
           <button @click="saveNote">Save</button>
           <button @click="backToList">Cancel</button>
+        </div>
     </section>
     `,
   data() {
     return {
       note: {
-            type: 'txtNote',
-            data: {
-              id : utilService.makeId(),
-              time :  moment().format('MMMM Do YYYY, h:mm:ss a'),            
-              txt : 'txt 1',
-              title: '1',
-              isPinned: false
-            }
+        type: "txtNote",
+        data: {
+          id: "",
+          time: moment().format("MMMM Do YYYY, h:mm:ss a"),
+          txt: "Enter text",
+          title: "Enter title",
+          isPinned: false,
+          color: "",
+          backgroundColor: ""
+        }
       }
     };
   },
   created() {
-
     const noteId = this.$route.params.noteId;
     if (noteId) {
       keepService.getNoteById(noteId).then(note => {
-        console.log(note);
-        
         this.note = note;
       });
     }
   },
   methods: {
     saveNote() {
-     keepService.saveNote(this.note);
-     this.backToList()
+      keepService.saveNote(this.note);
+      this.backToList();
     },
-    backToList(){
-      this.$router.push('/keep')        
+    backToList() {
+      this.$router.push("/keep");
+    }
+  },
+  computed: {
+    getColors() {
+      return {
+        color: this.note.data.color,
+        backgroundColor: this.note.data.backgroundColor
+      };
     }
   }
 };

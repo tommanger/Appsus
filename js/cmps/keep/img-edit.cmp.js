@@ -1,67 +1,78 @@
 import { keepService } from "../../service/keep-service.js";
-import  utilService from '../../service/util-service.js';
 
 export default {
   template: `
-    <section v-if="note" class="edit-img-container">
-        <div>
-                <img :src="note.data.imgUrl" :title="note.data.title" />
-                <p class="txt">{{note.data.txt}}</p>
+    <section v-if="note" class="edit-img-container":style="getColors" >
+        <div class="edit-img-img-container">
+                <img :src="note.data.url" :title="note.data.title" />
         </div>
-        <div>
-                <input ref="newImg"class="btn-edit-img" @change="saveImg()"/>
-                <button  class="addImg" @click="saveImg()">Add Image</button>
-                <label>
-                  Enter Text
-                  <textarea cols="30" rows="10" v-model="note.data.txt">{{note.data.txt}}</textarea>
+      
+        <div class="edit-img-inputs">
+          <label>               
+          <input type="text" v-model="note.data.title" placeholder="Enter Title">
+        </label>
+        <input ref="newImg"class="btn-edit-img" v-model="note.data.url" placeholder="Enter image url"/>
+          <label>
+            <textarea cols="30" rows="10" v-model="note.data.txt">{{note.data.txt}}</textarea>
+          </label>
+          <div class="btn-colors">
+              <label  class="btn-colors-bgc">
+              <i class="fas fa-fill-drip"></i>
+                  <input type="color" v-model="note.data.backgroundColor">
                 </label>
-                <label>               
-                  Enter Title : 
-                <input type="text" v-model="note.data.title">{{note.data.title}}
+                <label >
+                <i class="fas fa-brush"></i>
+                  <input type="color" v-model="note.data.color">
                 </label>
-        
+          </div>     
+          <div class="edit-btn-container">
+                    <button @click="saveNote">Save</button>
+                    <button @click="backToList">Cancel</button>
               </div>
-        <button @click="saveNote">Save</button>
-        <button @click="backToList">Cancel</button>
-
+            </div>
     </section>
     `,
   data() {
     return {
       note: {
-          type: 'imgNote',
-          data: {
-                        id: utilService.makeId(),
-                        time: moment().format("MMMM Do YYYY, h:mm:ss a"),
-                        imgUrl: "",
-                        imgTitle: "",
-                        txt: "Enter title",
-                        isPinned: false    
-          }
+        type: "imgNote",
+        data: {
+          id: "",
+          time: moment().format("MMMM Do YYYY, h:mm:ss a"),
+          url: "",
+          title: "",
+          txt: "Enter text",
+          isPinned: false,
+          color: '',
+          backgroundColor:''
+        }
       }
     };
   },
   created() {
-      console.log("edit img");
     const noteId = this.$route.params.noteId;
-    console.log(noteId);
     if (noteId) {
       keepService.getNoteById(noteId).then(note => {
-          console.log(note)
         this.note = note;
       });
     }
   },
   methods: {
-    saveImg() {
-      this.note.data.imgUrl = this.$refs.newImg.value;
+    saveNote() {
+      keepService.saveNote(this.note);
+      this.backToList();
     },
-    saveNote(){
-    keepService.saveNote(this.note);      
-        this.backToList();        
-    },
-    backToList(){
-        this.$router.push('/keep')        
+    backToList() {
+      this.$router.push("/keep");
+    }
+  },
+  computed:{
+    getColors(){
+      return {
+          color: this.note.data.color,
+          backgroundColor: this.note.data.backgroundColor
       }
+  }
+
   }
 };
