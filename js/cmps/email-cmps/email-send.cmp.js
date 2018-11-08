@@ -1,14 +1,17 @@
+import emailService from '../../service/email-service.js'
 
 
 export default {
     template: `
-    <section>
-        <h2>Send email</h2>
-        <form class="email-send-form" @submit.prevent="sendEmail">
-            from: <input type="text" v-model="email.from">
-            subject: <input type="text" v-model="email.subject">
-            <textarea v-model="email.body" cols="30" rows="10"></textarea>
-            <button type="submit">Send</button>
+    <section class="send-email-container">
+        <div class="btns-header center-send-title">
+            <h2 class="title-send-email">Send email <i class="fab fa-telegram-plane"></i></h2>
+        </div>
+        <form class="email-send-form title-header-email" @submit.prevent="sendEmail">
+            <input placeholder="from:" class="input-sent-email input-border-send" type="text" v-model="email.from">
+            </span><input placeholder="subject:" class="input-sent-email" type="text" v-model="email.subject">
+            <textarea class="body-send-email" v-model="email.body" cols="30" rows="10"></textarea>
+            <button class="btn-submit-email" type="submit">Send</button>
         </form>
     </section>
     `,
@@ -18,18 +21,38 @@ export default {
                 from: '',
                 subject: '',
                 body: '',
-            }
+            },
+            currEmail: null,
         }
     },
     methods:{
         sendEmail(){
-            console.log(this.email)
-            this.$emit('sendEmail',this.email)
+            // console.log(this.email)
+            if(this.currEmail){
+                // console.log(this.currEmail.id)
+                this.$emit('changeEmail',this.currEmail.id, this.email)
+            }else{
+                this.$emit('sendEmail',this.email)
+            }
             this.$router.push('/email')
+        },
+        getEmail(){
+            const emailId = this.$route.params.emailId;
+            // console.log(emailId)
+            if(emailId){
+                emailService.getEmailByID(emailId)
+                .then(currEmail => {
+                    this.currEmail = currEmail
+                    this.email.from = currEmail.from
+                    this.email.subject = currEmail.subject
+                    this.email.body = currEmail.body
+                })
+            }
         }
     },
     created() {
-        
+        this.getEmail()
+
     },
     computed:{
 

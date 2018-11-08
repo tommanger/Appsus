@@ -101,7 +101,7 @@ function starEmail(emailId){
     return storageService.load(KEY)
         .then(emails => {
             var currEmail = emails.find(email => email.id === emailId);
-            currEmail.isStar = true
+            currEmail.isStar = !currEmail.isStar
             return storageService.store(KEY, emails);
         })
 }
@@ -112,12 +112,20 @@ function sendEmail(newEmail){
             newEmail.sentAt = Date.now();
             newEmail.isRead = false;
             newEmail.isStar = false,
-            emails.push(newEmail)
+            emails.unshift(newEmail)
             return storageService.store(KEY, emails);
         })
 }
-
-
+function changeEmail(emailId, newEmail){
+    return storageService.load(KEY)
+    .then(emails => {
+        let email = emails.find(email => email.id === emailId);
+        email.from = newEmail.from
+        email.subject = newEmail.subject
+        email.body = newEmail.body
+        return storageService.store(KEY, emails);
+    }) 
+}
 
 export default {
     getEmailsList,
@@ -127,6 +135,7 @@ export default {
     readMail,
     starEmail,
     nextEmail,
-    prevEmail
+    prevEmail,
+    changeEmail
 }
 
