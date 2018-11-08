@@ -3,6 +3,7 @@
     margin: 10px 50px;
     columns: 4;
     column-gap: 10px;
+    /* background: red; */
 }
 
 .note-item{
