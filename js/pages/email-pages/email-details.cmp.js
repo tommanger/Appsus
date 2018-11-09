@@ -6,14 +6,15 @@ export default {
         <div class="btns-header">
             <router-link class="btn-delete btn-det" :to="'/email/'+prevEmailId">Prev Email</router-link>
             <div>
-                <button class="btn-delete" :class="{star: currEmail.isStar}" @click="starEmail(currEmail.id)"><i class="far fa-star"></i></i></button>
-                <button class="btn-delete" @click.prevent="deleteEmail(currEmail.id)"><i class="fas fa-trash-alt"></i></button>
-            </div>
-            <div>
-                <button class="btn-delete" @click="replyEmail(currEmail.id)">
-                    Reply  <i class="fas fa-reply"></i>
+                <button title="Back To Inbox" @click="returnToList"><i class="fas fa-arrow-circle-left btn-delete"></i></button>
+                <button title="Mark as starred" class="btn-delete" :class="{star: currEmail.isStar}" @click="starEmail(currEmail.id)"><i class="far fa-star"></i></i></button>
+                <button title="Delete" class="btn-delete" @click.prevent="deleteEmail(currEmail.id)"><i class="fas fa-trash-alt"></i></button>
+                <button title="Reply" class="btn-delete" @click="replyEmail(currEmail.id)">
+                    <i class="fas fa-reply"></i>
                 </button>
+                <button @click="unReadMail" title="Mark as unread"><i class="fas fa-envelope btn-delete"></i></button>
             </div>
+            
             <router-link class="btn-delete btn-det" :to="'/email/'+nextEmailId">Next Email</router-link>
 
         </div>
@@ -36,8 +37,15 @@ export default {
         }
     },
     methods:{
+        returnToList(){
+            this.$router.push('/email')
+        },
         readMail(emailId){
             this.$emit('readMail',emailId)
+        },
+        unReadMail(){
+            this.$emit('unReadMail', this.currEmail.id)
+            this.$router.push('/email')
         },
         deleteEmail(emailId){
             this.$emit('deleteEmail',emailId)

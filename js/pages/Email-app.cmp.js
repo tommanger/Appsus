@@ -15,6 +15,7 @@ export default {
           <router-view @changeEmail="changeEmail"	 
                         @sendEmail="sendEmail" 
                         @readMail="readMail"
+                        @unReadMail="unReadMail"
                         @deleteEmail="deleteEmail"
                         @starEmail="starEmail"
                         :emailList="emailList">
@@ -60,6 +61,13 @@ export default {
       let email = this.emailList.find(email => email.id === emailId)
       email.isRead = true
       emailService.readMail(emailId)
+      .then(this.setCounter)
+
+    },
+    unReadMail(emailId){
+      let email = this.emailList.find(email => email.id === emailId)
+      email.isRead = false
+      emailService.unReadMail(emailId)
       .then(this.setCounter)
 
     },

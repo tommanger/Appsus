@@ -96,6 +96,14 @@ function readMail(emailId){
             return storageService.store(KEY, emails);
         })
 }
+function unReadMail(emailId){
+    return storageService.load(KEY)
+        .then(emails => {
+            var currEmail = emails.find(email => email.id === emailId);
+            currEmail.isRead = false
+            return storageService.store(KEY, emails);
+        })
+}
 
 function starEmail(emailId){
     return storageService.load(KEY)
@@ -136,6 +144,7 @@ export default {
     starEmail,
     nextEmail,
     prevEmail,
-    changeEmail
+    changeEmail,
+    unReadMail
 }
 
