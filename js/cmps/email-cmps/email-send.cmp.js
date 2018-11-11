@@ -4,9 +4,6 @@ import emailService from '../../service/email-service.js'
 export default {
     template: `
     <section class="send-email-container">
-        <div class="btns-header center-send-title">
-            <h2 class="title-send-email">Send email <i class="fab fa-telegram-plane"></i></h2>
-        </div>
         <form class="email-send-form title-header-email" @submit.prevent="sendEmail">
             <input placeholder="from:" class="input-sent-email input-border-send" type="text" v-model="email.from">
             </span><input placeholder="subject:" class="input-sent-email" type="text" v-model="email.subject">

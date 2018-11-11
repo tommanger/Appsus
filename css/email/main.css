@@ -1,7 +1,14 @@
+*{
+    font-family: fisrt;
+}
+button:focus{
+    outline: none;
+}
+
 .email-list{
     width: 100%;
     background-color: black;
-
+    font-family: fisrt;
 }
 
 .title-email-list{
@@ -25,6 +32,7 @@
 }
 .btn-delete{
     color: rgb(156, 156, 156);
+    font-size: 20px;
 }
 .btn-delete:hover{
     color: white;
@@ -40,7 +48,17 @@
 }
 .from-list{
     flex: 0 0 100px;
+    font-family: fisrtBold;
 }
+.text-email-list{
+    display: flex;
+    flex: 1;    
+    align-items: center;
+}
+.btns-list{
+   display: flex; 
+}
+
 
 .readEmail{
 /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#236b61+0,0e0e0e+100 */
@@ -140,7 +158,7 @@
     flex-direction: column;
     align-items: center;
     width: 100%;
-    height: 88%;
+    height: 100%;
 
     /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#0e0e0e+0,236b61+99 */
     background: #0e0e0e; /* Old browsers */
@@ -160,6 +178,7 @@
     align-items: center;
     width: 100%;
     justify-content: space-around;
+    font-family: fisrt;
 }
 .body-det{
     margin-top: 30px;
@@ -169,6 +188,7 @@
     word-break: break-all;
     overflow: overlay;
     max-height: 400px;
+    font-family: fisrt;
 }
 .filter-emails{
     width: 100%;
@@ -209,6 +229,7 @@
 .btn-det{
     font-weight: bold;
     margin-left: 21px;
+    font-family: fisrt;
 }
 .star{
     color: rgb(255, 217, 0);
@@ -347,14 +368,21 @@
         margin-left: 10px;
     }
     .title-email-item {
-        margin-right: 20px;
+        margin-top: 10px;
+    }
+    .date-list{
+        margin-bottom: 10px;
     }
     .manu-email{
         position: absolute;
     }
+    .text-email-list{
+        flex-direction: column;    
+        align-items: flex-start;
+    }
 }
 
-@media only screen and (max-width: 320px) {
+@media only screen and (max-width: 300px) {
     .title-email-list{
         flex-direction: column;
         align-items: center;
@@ -367,14 +395,14 @@
 
 
 .width-enter-active{
-    transition: width .7s;
+    transition: width .3s;
   }
   .width-enter{
     width: 0;
   }
 
 .width-leave-active {
-    transition: width .7s;
+    transition: width .3s;
   }
 .width-leave-to{
     width: 0;
